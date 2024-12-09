@@ -17,10 +17,17 @@ import { useDispatch } from 'react-redux'
 import { TRIGGER } from '@/redux/slices/automation'
 
 export const useCreateAutomation = (id?: string) => {
+  const router = useRouter()
+
   const { isPending, mutate } = useMutationData(
     ['create-automation'],
     () => createAutomations(id),
-    'user-automations'
+    'user-automations',
+    (data: Awaited<ReturnType<typeof createAutomations>>) => {
+      router.push(
+        `/dashboard/${data.res?.firstname}${data.res?.lastname}/automations/${data.res?.id}`
+      )
+    }
   )
 
   return { isPending, mutate }

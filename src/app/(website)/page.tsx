@@ -47,10 +47,10 @@ export default function Home() {
           <div className="container px-4 py-8">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-lg bg-white flex items-center justify-center font-bold">
+                <div className="h-8 w-8 rounded-lg bg-white flex items-center justify-center text-secondary font-bold">
                   li
                 </div>
-                <span className="text-xl font-semibold text-primary-foreground">
+                <span className="text-xl font-semibold text-primary">
                   Slide
                 </span>
               </div>
@@ -59,7 +59,7 @@ export default function Home() {
                 <Link href="#pricing">Pricing</Link>
                 <Link href="#about">About</Link>
               </nav>
-              <Button className="bg-white text-primary">
+              <Button className="bg-white text-secondary">
                 <Link href="/dashboard">Login</Link>
               </Button>
             </div>
@@ -112,7 +112,10 @@ export default function Home() {
               Select the perfect plan to boost your Instagram engagement
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2 md:gap-8">
+          <div
+            className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2 md:gap-8"
+            id="pricing"
+          >
             {plans.map((plan, index) => (
               <Card
                 key={index}

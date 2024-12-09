@@ -1,5 +1,5 @@
 import React from 'react'
-import { ClerkLoading, SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
+import { ClerkLoading, SignedIn, SignedOut, SignInButton, UserButton, UserProfile } from '@clerk/nextjs'
 import { User } from "lucide-react"
 import Loader from '../loader'
 import { Button } from '@/components/ui/button'
@@ -22,8 +22,11 @@ function ClerkAuthState() {
         </SignedOut>
         <SignedIn>
             <UserButton>
-                <UserButton.UserProfileLink label='Dashboard' url='/dashboard' labelIcon={<User size={16} />} />
-                Profile
+                <UserButton.UserProfileLink
+                    label="Dashboard"
+                    url={`/dashboard`}
+                    labelIcon={<User size={16} />}
+                />
             </UserButton>
         </SignedIn>
     </>

@@ -17,8 +17,10 @@ export const onCurrentUser = async () => {
 
 export const onBoardUser = async () => {
   const user = await onCurrentUser()
+
   try {
     const found = await findUser(user.id)
+
     if (found) {
       if (found.integrations.length > 0) {
         const today = new Date()
@@ -26,9 +28,8 @@ export const onBoardUser = async () => {
           found.integrations[0].expiresAt?.getTime()! - today.getTime()
 
         const days = Math.round(time_left / (1000 * 3600 * 24))
-        if (days < 5) {
-          console.log('refresh')
 
+        if (days < 5) {
           const refresh = await refreshToken(found.integrations[0].token)
 
           const today = new Date()
@@ -39,6 +40,7 @@ export const onBoardUser = async () => {
             new Date(expire_date),
             found.integrations[0].id
           )
+          
           if (!update_token) {
             console.log('Update token failed')
           }
@@ -53,15 +55,18 @@ export const onBoardUser = async () => {
         },
       }
     }
+
     const created = await createUser(
       user.id,
       user.firstName!,
       user.lastName!,
       user.emailAddresses[0].emailAddress
     )
+
     return { status: 201, data: created }
   } catch (error) {
     console.log(error)
+    
     return { status: 500 }
   }
 }

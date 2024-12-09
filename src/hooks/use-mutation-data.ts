@@ -11,14 +11,14 @@ import {
     mutationKey: MutationKey,
     mutationFn: MutationFunction<any, any>,
     queryKey?: string,
-    onSuccess?: () => void
+    onSuccess?: (data: Awaited<ReturnType<typeof mutationFn>>) => void
   ) => {
     const client = useQueryClient()
     const { mutate, isPending } = useMutation({
       mutationKey,
       mutationFn,
       onSuccess: (data) => {
-        if (onSuccess) onSuccess()
+        if (onSuccess) onSuccess(data)
         return toast(data?.status === 200 ? 'Success' : 'Error', {
           description: data.data,
         })
